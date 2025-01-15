@@ -1,49 +1,55 @@
-import React from 'react';
-import {Box, Button, TextField} from "@mui/material";
+import React from "react";
+import { Box, Button, TextField } from "@mui/material";
 
 type InputFormProps = {
-    inputValue: string
-    isValid: boolean
-    warningMsg: string
-    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-    handleCalculate: () => void
+  inputValue: string;
+  isValid: boolean;
+  warningMsg: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCalculate: () => void;
+};
+
+function InputForm({
+  inputValue,
+  handleCalculate,
+  handleChange,
+  isValid,
+  warningMsg,
+}: InputFormProps) {
+  return (
+    <Box
+      mb={2}
+      display="flex"
+      gap={2}
+      alignItems="center"
+      sx={{ flexWrap: "wrap" }}
+    >
+      <TextField
+        label="Kwota w pensach"
+        variant="outlined"
+        value={inputValue}
+        onChange={handleChange}
+        error={!isValid && !!inputValue}
+        helperText={warningMsg}
+      />
+      <Button
+        variant="contained"
+        onClick={handleCalculate}
+        disabled={!isValid || !inputValue}
+        sx={{
+          height: 56,
+          width: 120,
+          textTransform: "none",
+          backgroundColor: "#3f51b5",
+          ":hover": {
+            backgroundColor: "#303f9f",
+          },
+        }}
+      >
+        Oblicz
+      </Button>
+    </Box>
+  );
 }
 
-function InputForm({inputValue, handleCalculate, handleChange, isValid, warningMsg}: InputFormProps) {
-    return (
-        <Box
-            mb={2}
-            display="flex"
-            gap={2}
-            alignItems="center"
-            sx={{ flexWrap: "wrap" }}
-        >
-            <TextField
-                label="Kwota w pensach"
-                variant="outlined"
-                value={inputValue}
-                onChange={handleChange}
-                error={!isValid && !!inputValue}
-                helperText={warningMsg}
-            />
-            <Button
-                variant="contained"
-                onClick={handleCalculate}
-                disabled={!isValid || !inputValue}
-                sx={{
-                    height: 56,
-                    width: 120,
-                    textTransform: "none",
-                    backgroundColor: "#3f51b5",
-                    ":hover": {
-                        backgroundColor: "#303f9f",
-                    },
-                }}
-            >
-                Oblicz
-            </Button>
-        </Box>
-    );
-}
-
-export  {InputForm};
+export { InputForm };
