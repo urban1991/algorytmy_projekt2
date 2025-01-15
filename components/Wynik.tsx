@@ -35,8 +35,8 @@ function Wynik({ result, inputValue }: WynikProps) {
       ))}
 
       <Typography variant="body1" mt={2}>
-        Do wydania podanej kwoty <strong>{cointCount}</strong> w pensach
-        potrzeba:
+        Do wydania podanej kwoty <strong>{inputValue}</strong> potrzeba:{" "}
+        <strong>{cointCount}</strong> monet.
       </Typography>
     </Box>
   ) : (
