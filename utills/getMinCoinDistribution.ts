@@ -13,23 +13,25 @@ function getMinimalCoinDistribution(amountInPence: number) {
 
     const dp = new Array<number>(amountInFarthings + 1).fill(Infinity);
 
-    const coinChoice = new Array<number>(amountInFarthings + 1).fill(-1);
+    const usedCoinIdxArr = new Array<number>(amountInFarthings + 1).fill(-1);
 
     dp[0] = 0;
 
-    for (let i = 1; i <= amountInFarthings; i++) {
-        for (let c = 0; c < denominations.length; c++) {
-            const coinValue = denominations[c].value;
-            if (coinValue <= i) {
-                if (dp[i - coinValue] + 1 < dp[i]) {
-                    dp[i] = dp[i - coinValue] + 1;
-                    coinChoice[i] = c;
+    for (let amount = 1; amount <= amountInFarthings; amount++) {
+        for (let j = 0; j < denominations.length; j++) {
+            const coinValue = denominations[j].value;
+
+            if (coinValue <= amount) {
+                const newCoinAmount  = dp[amount - coinValue] + 1
+
+                if (newCoinAmount < dp[amount]) {
+                    dp[amount] = newCoinAmount
+                    usedCoinIdxArr[amount] = j;
                 }
             }
         }
     }
 
-    let remaining = amountInFarthings;
     const distribution: Record<string, number> = {
         Gwinea: 0,
         Funt: 0,
@@ -37,16 +39,19 @@ function getMinimalCoinDistribution(amountInPence: number) {
         Szyling: 0,
         Pens: 0,
         Półpensówka: 0,
-        Ćwiartka: 0,
+        Ćwiartka: 0
     };
 
-    while (remaining > 0) {
-        const chosenCoinIndex = coinChoice[remaining];
-        if (chosenCoinIndex === -1) {
-            throw new Error(`Nie udało się wydać kwoty (pozostało ${remaining} fartingów do wydania).`);
+    let amountRemainingToBeSpent = amountInFarthings;
+    while (amountRemainingToBeSpent > 0) {
+        const usedCoinIndex = usedCoinIdxArr[amountRemainingToBeSpent];
+        if (usedCoinIndex === -1) {
+            throw new Error(`Nie udało się wydać kwoty (pozostało ${amountRemainingToBeSpent} fartingów do wydania).`);
         }
-        distribution[denominations[chosenCoinIndex].name]++;
-        remaining -= denominations[chosenCoinIndex].value;
+        const distributionKey = denominations[usedCoinIndex].name;
+
+        distribution[distributionKey]++;
+        amountRemainingToBeSpent -= denominations[usedCoinIndex].value;
     }
 
     return distribution;
