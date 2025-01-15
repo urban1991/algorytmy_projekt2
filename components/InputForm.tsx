@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 type InputFormProps = {
   inputValue: string;
@@ -24,6 +24,10 @@ function InputForm({
       alignItems="center"
       sx={{ flexWrap: "wrap" }}
     >
+      <Typography variant="h5" gutterBottom width="100%">
+        Przetestuj działanie algorytmu
+      </Typography>
+
       <TextField
         label="Kwota w pensach"
         variant="outlined"
