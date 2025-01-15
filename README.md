@@ -57,5 +57,6 @@ Celem aplikacji jest wyznaczenie **minimalnej liczby „monet”** (w tym półp
 ## Autor
 
 **Piotr Urbaniak** 
+**GitHub repostory link:** https://github.com/urban1991/algorytmy_projekt2
 
 
