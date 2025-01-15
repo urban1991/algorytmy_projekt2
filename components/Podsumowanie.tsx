@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Paper, Typography } from "@mui/material";
+import Link from "next/link";
 
 function Podsumowanie() {
   return (
@@ -23,6 +24,17 @@ function Podsumowanie() {
           <em> siatkę podproblemów</em> (DP), z której odczytujemy minimalną
           liczbę „monet” dla każdej mniejszej kwoty, a następnie składamy
           rozwiązanie końcowe.
+        </Typography>
+        <Typography variant="h6" textAlign="start" sx={{ mt: 2 }}>
+          Zapraszam do przejrzenia kodu zrealizowanego w projekcie na GitHubie:{" "}
+          <Link
+            href="https://github.com/urban1991/algorytmy_projekt2"
+            target="_blank"
+            rel="noopener"
+            style={{ color: "#3f51b5" }}
+          >
+            Link do repozytorium
+          </Link>
         </Typography>
       </Box>
     </Paper>
