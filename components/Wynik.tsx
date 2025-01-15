@@ -7,6 +7,7 @@ type WynikProps = {
 }
 
 function Wynik({result, inputValue}: WynikProps) {
+    const cointCount = result && Object.values(result).reduce((acc, val) => acc + val, 0)
     return result ?  (
         <Box
             mt={2}
@@ -32,8 +33,7 @@ function Wynik({result, inputValue}: WynikProps) {
             ))}
 
             <Typography variant="body1" mt={2}>
-                Do wydania zadanej kwoty potrzeba łącznie{" "}
-                {Object.values(result).reduce((acc, val) => acc + val, 0)} monet.
+                Do wydania podanej kwoty <strong>{cointCount}</strong> w pensach potrzeba:
             </Typography>
         </Box>
     ) : <></>
